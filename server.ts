@@ -1,10 +1,11 @@
-import fastify from 'fastify'
+import Fastify from 'fastify'
+import { routes } from './routes'
 
-const server = fastify()
-
-server.get('/', (request, reply) => {
-  reply.send({ hello: 'world' })
+const server = Fastify({
+  logger: true,
 })
+
+server.register(routes)
 
 server.listen({ port: 3000 }, (err, address) => {
   if (err) {
@@ -12,5 +13,5 @@ server.listen({ port: 3000 }, (err, address) => {
     process.exit(1)
   }
 
-  console.log(`✅ Server is now listening on ${address}`)
+  console.log(`✅ Server is now listening on \x1b[34m${address}`)
 })
