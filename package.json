@@ -1,17 +1,27 @@
 {
+  "husky": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.ts": "tsc-files --noEmit"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "node --watch --loader=ts-node/esm server.ts",
-    "start": "npx ts-node server.ts"
+    "start": "npx ts-node server.ts",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fastify/mongodb": "^8.0.0",
     "fastify": "^4.24.0",
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^4.5.1",
+    "mongodb": "4.1"
   },
   "devDependencies": {
     "@swc/helpers": "^0.5.3",
     "@types/node": "^20.8.5",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
     "regenerator-runtime": "^0.14.0",
     "ts-node": "~10.9.0",
     "typescript": "^5.2.2"
