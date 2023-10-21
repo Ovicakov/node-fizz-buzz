@@ -1,3 +1,4 @@
+import dbConnector from './dbConnector'
 import Fastify from 'fastify'
 import { routes } from './routes'
 
@@ -5,11 +6,15 @@ const server = Fastify({
   logger: true,
 })
 
+server.register(dbConnector)
 server.register(routes)
 
-server.listen({ port: 3000 }, (err, address) => {
-  if (err) {
-    server.log.error(err)
+server.listen({ port: 3000 }, (error, address) => {
+  if (error) {
+    server.log.error(error)
+    console.log(
+      `❌ Fail running on \x1b[34m${address} \x1b[0mbecause of \x1b[31m${error}`
+    )
     process.exit(1)
   }
 
