@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify'
 import fastifyMongo from '@fastify/mongodb'
 import fastifyPlugin from 'fastify-plugin'
 
-async function dbConnector(fastify: FastifyInstance, options: Object) {
+async function dbConnector(fastify: FastifyInstance) {
   fastify.register(fastifyMongo, {
     url: 'mongodb://localhost:27017/test_database',
   })
