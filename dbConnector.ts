@@ -1,10 +1,23 @@
 import { FastifyInstance } from 'fastify'
 import fastifyMongo from '@fastify/mongodb'
 import fastifyPlugin from 'fastify-plugin'
+import fastifyEnv from '@fastify/env'
+
+import { dbSchema as schema } from './.env-schema'
+
+const envOptions = {
+  configKey: 'config',
+  schema,
+  dotenv: true,
+  data: process.env,
+}
 
 async function dbConnector(fastify: FastifyInstance) {
+  fastify.register(fastifyEnv, envOptions)
+  await fastify.after()
+
   fastify.register(fastifyMongo, {
-    url: 'mongodb+srv://cluster0.ellkte1.mongodb.net/',
+    url: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.ellkte1.mongodb.net/`,
   })
 }
 
