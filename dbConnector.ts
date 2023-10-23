@@ -4,7 +4,7 @@ import fastifyPlugin from 'fastify-plugin'
 
 async function dbConnector(fastify: FastifyInstance) {
   fastify.register(fastifyMongo, {
-    url: 'mongodb://localhost:27017/test_database',
+    url: 'mongodb+srv://cluster0.ellkte1.mongodb.net/',
   })
 }
 
