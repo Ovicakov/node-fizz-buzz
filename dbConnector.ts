@@ -17,7 +17,7 @@ async function dbConnector(fastify: FastifyInstance) {
   await fastify.after()
 
   fastify.register(fastifyMongo, {
-    url: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.ellkte1.mongodb.net/`,
+    url: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.sbcmk6b.mongodb.net/fizzbuzz`,
   })
 }
 
