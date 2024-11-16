@@ -1,3 +1,4 @@
+import { error } from 'console'
 import { FastifyInstance } from 'fastify'
 
 interface TQuerystring {
@@ -23,12 +24,24 @@ const queryStringSchema = {
   },
 }
 
+// Example: curl http://127.0.0.1:3000/fizzbuzz\?int1\=13\&int2\=4\&limit\=100\&str1\=fizz\&str2\=buzz
+
 async function routes(fastify: FastifyInstance) {
   fastify.get<{ Querystring: TQuerystring }>(
     '/fizzbuzz',
     queryStringSchema,
     (request, reply) => {
       const { int1, int2, limit, str1, str2 } = request.query
+
+      switch (true) {
+        case int1 == null:
+        case int2 == null:
+        case limit == null:
+        case str1 == null || str1 == '':
+        case str2 == null || str2 == '':
+          reply.status(404).send('Wrong parameter')
+        default:
+      }
 
       const output: (number | string)[] = []
 
@@ -48,49 +61,3 @@ async function routes(fastify: FastifyInstance) {
 }
 
 export { routes }
-
-// fastify.get('/fizzbuzz', async () => {
-// const collection = fastify.mongo.db?.collection('fizzbuzz')
-
-//   const result = await collection?.find().toArray()
-
-//   if (result?.length === 0) {
-//     throw new Error('No documents found')
-//   }
-
-//   if (result === undefined) {
-//     throw new Error('Result is undefined')
-//   }
-//   return result
-// })
-
-// const animalBodyJsonSchema = {
-//   type: 'object',
-//   required: ['number'],
-//   properties: {
-//     number: { type: 'number' },
-//   },
-// }
-
-// const schema = {
-//   body: animalBodyJsonSchema,
-// }
-
-// fastify.post(
-//   '/fizzbuzz',
-//   { schema },
-//   async (request: FastifyRequest<{ Body: BodyOrParams }>, reply) => {
-//     // we can use the `request.body` object to get the data sent by the client
-//     const result = await collection?.insertOne({
-//       number: request.body.number,
-//     })
-
-//     if (!result) {
-//       console.log({ result })
-//       throw new Error(`Issue on POST because of ${reply.log.error}`)
-//     }
-
-//     return result
-//   }
-// )
-// }
