@@ -17,10 +17,8 @@
   },
   "dependencies": {
     "@fastify/env": "^4.2.0",
-    "@fastify/mongodb": "^8.0.0",
     "fastify": "^4.24.0",
-    "fastify-plugin": "^4.5.1",
-    "mongodb": "4.1"
+    "fastify-plugin": "^4.5.1"
   },
   "devDependencies": {
     "@swc/helpers": "^0.5.3",

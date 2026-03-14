@@ -1,13 +1,11 @@
 import Fastify from 'fastify'
 
-// import dbConnector from './dbConnector'
 import { routes } from './routes'
 
 const server = Fastify({
   logger: true,
 })
 
-// server.register(dbConnector)
 server.register(routes)
 
 server.listen({ port: 3000 }, (error, address) => {
