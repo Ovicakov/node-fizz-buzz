@@ -1,4 +1,3 @@
-import { error } from 'console'
 import { FastifyInstance } from 'fastify'
 
 interface TQuerystring {
@@ -40,7 +39,9 @@ async function routes(fastify: FastifyInstance) {
         case str1 == null || str1 == '':
         case str2 == null || str2 == '':
           reply.status(404).send('Wrong parameter')
+          return
         default:
+          break
       }
 
       const output: (number | string)[] = []
