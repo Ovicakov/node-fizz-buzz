@@ -1,21 +1,25 @@
-import Fastify from 'fastify'
+import Fastify from "fastify";
+import { testConnection } from "./db";
 
-import { routes } from './routes'
+import { routes } from "./routes";
 
 const server = Fastify({
   logger: true,
-})
+});
 
-server.register(routes)
+// Tester la connexion au démarrage
+await testConnection();
+
+server.register(routes);
 
 server.listen({ port: 3000 }, (error, address) => {
   if (error) {
-    server.log.error(error)
+    server.log.error(error);
     console.log(
-      `❌ Fail running on \x1b[34m${address} \x1b[0mbecause of \x1b[31m${error}`
-    )
-    process.exit(1)
+      `❌ Fail running on \x1b[34m${address} \x1b[0mbecause of \x1b[31m${error}`,
+    );
+    process.exit(1);
   }
 
-  console.log(`✅ Server is now listening on \x1b[34m${address}`)
-})
+  console.log(`✅ Server is now listening on \x1b[34m${address}`);
+});
