@@ -3,9 +3,9 @@
 This project a back-end try with these technologies :
 
 - Node.js
-- fastify
 - TypeScript
-- mongodb
+- PostgreSQL
+- Docker
 - husky
 
 ### About issues:
